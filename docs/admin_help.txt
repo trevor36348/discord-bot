@@ -1,0 +1,52 @@
+```
+DEV Bot: Created by trevor09 (#3494)
+===================================================
+
+List of Commands:  
+
+
+ADMIN COMMANDS ------------------------------------
+!help           Lists set of commands (this page)
+
+!set_role       Server admins can set a specify a
+                role which if a user has, then
+                they can use certain commands
+                based on it
+
+  NOTE, input as:
+  >  !set_role "type_role" "NAME"
+  For example:
+  >  !set_role game Games_Role
+
+  "NAME" is the name of the role in your server
+  "type_role" is one of the following
+
+  full          user has access to all commands
+                except admin ones
+  game          user has access to only game
+                commands
+  text          user has access to only text
+                commands 
+
+!remove_role    Removes a specified role
+
+ NOTE, input as:
+  >  !set_role "type_role"
+    For example:
+  >  !remove_role game
+
+!list_roles     List all server roles assigned to 
+                a type_role
+
+FULL COMMANDS -------------------------------------
+!help_full      List full commands, sent as DM
+
+
+GAME COMMANDS -------------------------------------
+!help_game      List game commands, sent as DM
+
+
+TEXT COMMANDS -------------------------------------
+!help_text      List text commands, sent as DM
+
+===================================================```

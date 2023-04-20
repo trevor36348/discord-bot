@@ -1,0 +1,5 @@
+n1D3jfN3.txt
+*.pyc
+*.pyo
+__pycache__/
+*.py[cod]
