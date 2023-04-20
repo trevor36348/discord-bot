@@ -1,6 +1,19 @@
 import re
 
-def modify_text(command_type, target, text):
+def modify_text(message):
+  try:
+    command_type = message.split()[0]
+    target = (message.split()[1])
+    text = (message.split(":")[1]).lstrip()
+
+    if (target[-1] != ":"):
+      return ('Invalid input, missing arguments!')
+    else:
+      target = target[:-1]
+
+  except IndexError:
+    return('Invalid input, missing arguments!')
+  
   match (command_type):
 
     case "find":
@@ -21,7 +34,7 @@ def modify_text(command_type, target, text):
       return (text)
     
     case "remove":
-      text = text.replace(target, (text))
+      text = text.replace(target, (""))
       text = text.replace("  ", (" "))
       return (text)
     
