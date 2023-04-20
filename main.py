@@ -20,6 +20,7 @@ Discord bot built with the purpose of practicing developing. Bot has a variety o
 import re
 import discord
 from botFunctions import *
+from commands.textcommands import *
 from discord.ext import commands, tasks
 from discord.ext.commands import Bot
 
@@ -65,7 +66,7 @@ async def set_role(ctx, *, message):
 #   !set_role "type_role" "server_role"
   try:
     type_role = message.split()[0]
-    server_role = message.split()[1]
+    server_role = message.replace((type_role+" "), "", 1)
   except IndexError:
     await ctx.send('Invalid input, missing name of server role "' + type_role + '" will be assigned to.')
     return 0
@@ -129,8 +130,7 @@ async def help_game(ctx):
 """
 TEXT Commands
 """
-
-# 
+#
 @bot.command()
 async def help_text(ctx):
   if (checkUserRole(roles[0], str(ctx.message.author.roles)) or checkUserRole(roles[2], str(ctx.message.author.roles))):
@@ -138,6 +138,28 @@ async def help_text(ctx):
   else:
     await ctx.send('NOT ALLOWED')
 
+# 
+@bot.command()
+async def modTxt(ctx, *, message):
+  try:
+    command_type = message.split()[0]
+    target = (message.split()[1])
+    text = (message.split(":")[1]).lstrip()
+
+    if (target[-1] != ":"):
+      await ctx.send('Invalid input, missing arguments!')
+      return 0
+    else:
+      target = target[:-1]
+    
+  except IndexError:
+    await ctx.send('Invalid input, missing arguments!')
+    return 0
+  
+  if (checkUserRole(roles[0], str(ctx.message.author.roles)) or checkUserRole(roles[2], str(ctx.message.author.roles))):
+    await ctx.send(modify_text(command_type, target, text))
+  else:
+    await ctx.send('NOT ALLOWED')
 
 
 """
