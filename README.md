@@ -10,7 +10,7 @@ Discord bot built with the purpose of practicing developing. Bot has a variety o
 
 ## IMPORTANT
 Bot commands are to be prefixed with: !
--   `For example, if you want to run help, do
+-   For example, if you want to run help, do
     -   *!help*
 Bot commands aside from admin ones are not available once bot joins the server (currently seeking to update this for admins). To use the set of commands associated to a type of command above, admins must do the following:
 -   In your server, create a role with an **alphanumeric** name
@@ -34,9 +34,29 @@ An explanation of Admin commands are as follows:
     -   Description: bot brings up help screen
 
 ## Bot Capabilities:
--   Text commands such as:
-    -   ...
-    -   ...
+Text commands such as:
+-   !*modTxt*
+    -   Format: *!modText "command_type" "scope" "target": "text"*
+    -   Description: bot either modifies or determine details of provided text
+        -   *"command_type"*, one of:
+            -   **find** (find # of occurences of "target" in a "text", returns it with all occurences highlighted)
+            -   **replace** ("target" takes format of "in_text"-"to_replace", replaces all occurences of "in_text" with "to_replace")
+        -   *"scope"*, one of:
+            -   **all** (all possible matches)
+            -   **spec** (only the specific word)
+            -   **case_spec** (only the specific word, case sensitive)
+        -   *"target"*
+            -   word we wish to do something with
+            -   **EXCEPT** when using command type **replace**, then "target" takes the format of "in_text"-"to_replace"
+        -   *"text"*
+            -   text we wish to modify or analyze
+
+    -   Examples:
+        -   We want to find all occurences of mike in a text (including in stuff like mikeimator or so), we do:
+            -   !modTxt find all mike: "text"
+        -   We want to replace Mike (case sensitive) and only Mike in a text with Adam
+            -   !modTxt replace case_spec Mike-Adam: "text"
+    
 
 -   Ability to play games such as TicTacToe and Rock Paper Scissors against another person or bot
 
