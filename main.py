@@ -38,7 +38,11 @@ bot = Bot (
 # Once an admin assigns a server role to a type of role, users with that server role can use the 
 #   commands associated with the type role
 # --------------------------------------------------------------------------------------------------
-roles = ['', '', '']
+roles = {
+  "full": "",
+  "game": "",
+  "text": ""
+}
 
 # Upon bot loading into server send message to console
 @bot.event
@@ -94,8 +98,15 @@ async def remove_role(ctx, *, type_role):
 @bot.command()
 @commands.has_permissions(administrator=True)
 async def list_roles(ctx):
-  await ctx.send(roles)
+  return_roles = "```"
 
+  for type_role, associated_role in roles.items():
+    if roles[type_role] == "":
+      return_roles += (type_role + ' :  ' + '[No discord role mapped to "' + type_role + '"]\n')
+    else :
+      return_roles += (type_role + ' :  ' + associated_role + '\n')
+
+  await ctx.send(return_roles+ "```")
 
 
 """
@@ -106,7 +117,7 @@ FULL Commands
 @bot.command()
 async def help_full(ctx):
   # Check if user has a server role associated with full
-  if checkUserRole(roles[0], str(ctx.message.author.roles)):
+  if checkUserRole(roles["full"], str(ctx.message.author.roles)):
     await (ctx.message.author).send(readfile("docs/full_help.txt"))
   else:
     await (ctx.message.author).send('NOT ALLOWED')
@@ -120,7 +131,7 @@ GAME Commands
 # 
 @bot.command()
 async def help_game(ctx):
-  if (checkUserRole(roles[0], str(ctx.message.author.roles)) or checkUserRole(roles[1], str(ctx.message.author.roles))):
+  if (checkUserRole(roles["full"], str(ctx.message.author.roles)) or checkUserRole(roles["game"], str(ctx.message.author.roles))):
     await (ctx.message.author).send(readfile("docs/game_help.txt"))
   else:
     await (ctx.message.author).send('NOT ALLOWED')
@@ -133,7 +144,7 @@ TEXT Commands
 #
 @bot.command()
 async def help_text(ctx):
-  if (checkUserRole(roles[0], str(ctx.message.author.roles)) or checkUserRole(roles[2], str(ctx.message.author.roles))):
+  if (checkUserRole(roles["full"], str(ctx.message.author.roles)) or checkUserRole(roles["text"], str(ctx.message.author.roles))):
     await (ctx.message.author).send(readfile("docs/text_help.txt"))
   else:
     await (ctx.message.author).send('NOT ALLOWED')
@@ -141,7 +152,7 @@ async def help_text(ctx):
 # 
 @bot.command()
 async def modTxt(ctx, *, message):
-  if (checkUserRole(roles[0], str(ctx.message.author.roles)) or checkUserRole(roles[2], str(ctx.message.author.roles))):
+  if (checkUserRole(roles["full"], str(ctx.message.author.roles)) or checkUserRole(roles["text"], str(ctx.message.author.roles))):
     await ctx.send(modify_text(message))
   else:
     await (ctx.message.author).send('NOT ALLOWED')

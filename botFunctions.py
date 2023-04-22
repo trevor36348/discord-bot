@@ -21,10 +21,10 @@ def checkUserRole(req_role, user_discord_roles):
 def setTypeRole(roles, type_role, server_role):
   match (type_role):
     case 'full':
-      roles[0] = server_role
+      roles["full"] = server_role
     case 'game':
-      roles[1] = server_role
+      roles["game"] = server_role
     case 'text':
-      roles[2] = server_role
+      roles["text"] = server_role
     case _:
       return False
