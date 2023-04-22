@@ -54,14 +54,19 @@ def modify_text(message):
       return (return_text)
     
     #-------------------------------------------------------------------------
-    #case "remove":
-    #  my_regex = checkScope(scope, in_text)
-    #  if my_regex == False:
-    #    return('Invalid input, incorrect scope!')
+    case "remove":    
+      my_regex = checkScope(scope, target)
+      if my_regex == False:
+        return('Invalid input, incorrect scope!')
       
-    #  print("HELP")
-    #  return(replaceFunction(my_regex, "", text))
-    #.replace("  ", (" "))
+      if scope == "case_spec":
+        return_text = replaceFunction(my_regex, "", text, True)
+      else:
+        return_text = replaceFunction(my_regex, "", text)
+      
+      return_text = replaceFunction("  ", " ", return_text)
+      return (return_text)
+    
     #-------------------------------------------------------------------------
     case _:
       return ("Invalid command to modify the text with!")
